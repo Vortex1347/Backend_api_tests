@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package web_transfer_api;
+
+service WebTransferApi {
+  rpc makeWebTransfer (IncomingWebTransfer) returns (OutgoingWebTransfer) {}
+}
+
+service WebPaymentApi {
+   rpc makeWebPayment (IncomingWebPayment) returns (OutgoingWebPayment) {}
+}
+
+message IncomingWebTransfer {
+  string code = 1;
+  string data = 2;
+}
+
+message OutgoingWebTransfer {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+message IncomingWebPayment {
+	string code = 1;
+	string data = 2;
+}
+  
+  message OutgoingWebPayment {
+	bool success = 1;
+	string data = 2;
+	Error error = 3;
+}
+  
+message Error {
+  string code = 1;
+  string data = 2;
+}

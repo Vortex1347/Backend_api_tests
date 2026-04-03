@@ -45,7 +45,7 @@ USER_AGENT = '12; iPhone12MaxProDan'
 
 # ===== ДАННЫЕ СЕССИИ =====
 SESSION_KEY = '7C17ZJOKrOlYPvkoeQ835L'  # TODO: Заполнить session key для gRPC переводов
-ADMIN_SESSION_KEY = '3hOHJw2PlhKYtOeM1QsrLR'  # Session key для Admin API
+ADMIN_SESSION_KEY = '762LmmDOQXTuLnDRr3mmIr'  # Session key для Admin API
 
 # ===== OTP КОД =====
 OTP_CODE = "111111"  # TODO: Заполнить OTP код

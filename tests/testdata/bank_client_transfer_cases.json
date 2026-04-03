@@ -1,0 +1,330 @@
+[
+  {
+    "name": "internal_ipc_visa_to_compass_visa_by_card_no_kgs",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:IPC_CARD->COMPASS_CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "card_no": "4446791000075141",
+      "card_mask": "4446 **** **** 5141",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "card_no": "4177480194280312",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      }
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Matrix IPC Visa to Compass Visa by card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "internal_ipc_visa_to_compass_mastercard_by_card_no_kgs",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:CARD_NO:IPC_CARD->COMPASS_CARD",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "card_no": "4446791000075141",
+      "card_mask": "4446 **** **** 5141",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "card_no": "5262477769210628",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      }
+    },
+    "request": {
+      "accountCreditPropType": "CARD_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Matrix IPC Visa to Compass MasterCard by card"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "internal_ipc_card_to_current_account_by_account_no_kgs",
+    "route_key": "MAKE_BANK_CLIENT_TRANSFER:ACCOUNT_NO:IPC_CARD->CURRENT",
+    "operation": {
+      "code": "MAKE_BANK_CLIENT_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "card_no": "4446791000075141",
+      "card_mask": "4446 **** **** 5141",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "accountCreditPropType": "ACCOUNT_NO",
+      "amountDebit": "1.00",
+      "paymentPurpose": "Matrix IPC card to current account"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "own_accounts_exchange_kgs_to_usd_current_00909471",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:CURRENT->CURRENT:FX",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059315513",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "clearing_external_repo_fixture_kgs",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909466",
+      "account_no": "1280016059310156",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "gross_external_repo_fixture_kgs",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:GROSS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909466",
+      "account_no": "1280016059310156",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "transferClearingGross": "G",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  },
+  {
+    "name": "swift_external_repo_fixture_usd",
+    "route_key": "MAKE_SWIFT_TRANSFER:CARD->SWIFT",
+    "operation": {
+      "code": "MAKE_SWIFT_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285090000895593",
+      "expected": {
+        "currency": "USD",
+        "account_kind": "CARD",
+        "processor": "NONE",
+        "card_system": "VISA"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "transferCcy": "USD",
+      "recipientAddress": "123 Main Street, New York, NY 10001",
+      "recipientName": "John Smith",
+      "recipientBankSwift": "KICBKG22",
+      "recipientAccNo": "1234567890",
+      "transferPurposeText": "Payment for services",
+      "commissionType": "OUR",
+      "files": []
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "otp": "111111",
+    "device_type": "ios",
+    "user_agent": "12; iPhone12MaxProDan"
+  }
+]

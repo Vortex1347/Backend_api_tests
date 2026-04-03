@@ -1,223 +1,164 @@
-import sys
-import os
-import uuid
-import grpc
+from __future__ import annotations
+
+from collections import defaultdict
 import json
+import sys
+import uuid
+from pathlib import Path
+from typing import Any, Mapping
+
+import grpc
 import pytest
 
-# ===== НАСТРОЙКА PROTOBUF =====
-# Путь к директории с protobuf файлами
-PROTOBUF_PATH = os.path.join(os.path.dirname(__file__), 'protofiles')
+from data import DEVICE_TYPE, GRPC_OPTIONS, GRPC_SERVER_URL, OTP_CODE, SESSION_KEY, USER_AGENT
 
-sys.path.append(PROTOBUF_PATH)
+REPO_ROOT = Path(__file__).resolve().parent
+PROTO_PATH = REPO_ROOT / "protofiles"
 
-# Импорт protobuf файлов
+if str(PROTO_PATH) not in sys.path:
+    sys.path.insert(0, str(PROTO_PATH))
+
 import protofile_pb2 as webTransferApi_pb2
 import protofile_pb2_grpc as webTransferApi_pb2_grpc
 
-# Импорт данных для использования в фикстурах (модульно, чтобы обновлять SESSION_KEY динамически)
-import data as app_data
-from database_collector import DatabaseConfig, DataCollector
+
+ROUTE_SUMMARY: dict[str, dict[str, int]] = defaultdict(
+    lambda: {'passed': 0, 'skipped': 0, 'failed': 0, 'xfailed': 0}
+)
 
 
-# ===== PYTEST ФИКСТУРЫ =====
-
-@pytest.fixture(autouse=True, scope="function")
-def _load_session_key_before_test():
-    """Авто-фикстура: перед каждым тестом загружает валидный session_key из БД в app_data.SESSION_KEY.
-    Пробует несколько offset и user_id, если не находит для user_id=134.
-    При ошибке оставляет текущее значение app_data.SESSION_KEY без изменений.
-    """
-    try:
-        config = DatabaseConfig()
-        collector = DataCollector(config)
-        
-        # Список user_id для попыток (можно расширить)
-        user_ids_to_try = [134, 1, 2, 3]
-        max_offset = 5  # Максимальное количество offset для каждого user_id
-        
-        session_key = None
-        
-        # Пробуем найти валидный session_key
-        for user_id in user_ids_to_try:
-            for offset in range(max_offset):
-                session_key = collector.get_valid_session_key(user_id=user_id, offset=offset)
-                if session_key:
-                    app_data.SESSION_KEY = session_key
-                    print(f"[session_key_loader] ✅ Обновлен session_key для user_id={user_id}, offset={offset}: {session_key[:10]}...")
-                    return  # Успешно нашли ключ, выходим
-            # Если для этого user_id не нашли, пробуем следующий
-        
-        # Если не нашли ни одного ключа
-        if not session_key:
-            print(f"[session_key_loader] ⚠️  Не найден валидный session_key для user_ids={user_ids_to_try} с offset до {max_offset}")
-            print(f"[session_key_loader] Используется текущий session_key: {app_data.SESSION_KEY[:10] if app_data.SESSION_KEY else 'None'}...")
-            
-    except Exception as e:
-        # Логируем и продолжаем с текущим ключом
-        print(f"[session_key_loader] ❌ Ошибка при загрузке session_key: {e}")
-        print(f"[session_key_loader] Используется текущий session_key: {app_data.SESSION_KEY[:10] if app_data.SESSION_KEY else 'None'}...")
-
-@pytest.fixture
-def grpc_metadata():
-    """Фикстура для генерации метаданных запроса"""
-    def _create_metadata():
-        return (
-            ('refid', str(uuid.uuid1())),
-            ('sessionkey', app_data.SESSION_KEY),
-            ('device-type', app_data.DEVICE_TYPE),
-            ('user-agent-c', app_data.USER_AGENT),
-        )
-    return _create_metadata
+def create_metadata(
+    session_key: str = SESSION_KEY,
+    device_type: str = DEVICE_TYPE,
+    user_agent: str = USER_AGENT,
+    ref_id: str | None = None,
+    extra_headers: Mapping[str, Any] | None = None,
+) -> tuple[tuple[str, str], ...]:
+    metadata: list[tuple[str, str]] = [
+        ("refid", ref_id or str(uuid.uuid4())),
+        ("sessionkey", str(session_key)),
+        ("device-type", str(device_type)),
+        ("user-agent-c", str(user_agent)),
+    ]
+    if extra_headers:
+        metadata.extend((str(key), str(value)) for key, value in extra_headers.items() if value is not None)
+    return tuple(metadata)
 
 
-@pytest.fixture
-def grpc_client():
-    """Фикстура для создания gRPC клиента"""
-    def _get_client():
-        channel = grpc.secure_channel(
-            app_data.GRPC_SERVER_URL,
-            grpc.ssl_channel_credentials(),
-            options=app_data.GRPC_OPTIONS
-        )
-        return webTransferApi_pb2_grpc.WebTransferApiStub(channel), channel
-    return _get_client
+def make_grpc_request(
+    code: str,
+    data: Mapping[str, Any] | str | None,
+    metadata: tuple[tuple[str, str], ...] | None = None,
+    server_url: str = GRPC_SERVER_URL,
+    options: list[tuple[str, Any]] | None = None,
+):
+    request_data = data if isinstance(data, str) else json.dumps(data or {}, ensure_ascii=False, default=str)
+    request = webTransferApi_pb2.IncomingWebTransfer(code=code, data=request_data)
 
-
-# ===== HELPER ФУНКЦИИ =====
-
-def make_grpc_request(code: str, data: dict, metadata: tuple):
-    """
-    Общая функция для выполнения gRPC запроса через WebTransferApi
-    
-    Args:
-        code: Код операции
-        data: Данные запроса (dict)
-        metadata: Метаданные запроса (tuple)
-    
-    Returns:
-        Response от сервера
-    """
-    request = webTransferApi_pb2.IncomingWebTransfer(
-        code=code,
-        data=json.dumps(data)
-    )
-    
     with grpc.secure_channel(
-            app_data.GRPC_SERVER_URL,
-            grpc.ssl_channel_credentials(),
-            options=app_data.GRPC_OPTIONS
+        server_url,
+        grpc.ssl_channel_credentials(),
+        options=options or GRPC_OPTIONS,
     ) as channel:
         client = webTransferApi_pb2_grpc.WebTransferApiStub(channel)
-        response = client.makeWebTransfer(request, metadata=metadata)
+        return client.makeWebTransfer(request, metadata=metadata or create_metadata())
+
+
+def assert_success(response: Any, step_name: str = "gRPC request") -> Any:
+    if getattr(response, "success", False):
         return response
 
-
-def make_web_account_request(code: str, data: dict, metadata: tuple):
-    """
-    Общая функция для выполнения gRPC запроса через WebAccountApi
-    
-    Args:
-        code: Код операции
-        data: Данные запроса (dict)
-        metadata: Метаданные запроса (tuple)
-    
-    Returns:
-        Response от сервера
-    """
-    request = webTransferApi_pb2.WebAccountsRequest(
-        code=code,
-        data=json.dumps(data)
-    )
-    
-    with grpc.secure_channel(
-            app_data.GRPC_SERVER_URL,
-            grpc.ssl_channel_credentials(),
-            options=app_data.GRPC_OPTIONS
-    ) as channel:
-        client = webTransferApi_pb2_grpc.WebAccountApiStub(channel)
-        response = client.makeWebAccount(request, metadata=metadata)
-        return response
-
-
-def make_web_account_request(code: str, data: dict, metadata: tuple):
-    """
-    Общая функция для выполнения gRPC запроса через WebAccountApi
-    
-    Args:
-        code: Код операции
-        data: Данные запроса (dict)
-        metadata: Метаданные запроса (tuple)
-    
-    Returns:
-        Response от сервера
-    """
-    request = webTransferApi_pb2.WebAccountsRequest(
-        code=code,
-        data=json.dumps(data)
-    )
-    
-    with grpc.secure_channel(
-            app_data.GRPC_SERVER_URL,
-            grpc.ssl_channel_credentials(),
-            options=app_data.GRPC_OPTIONS
-    ) as channel:
-        client = webTransferApi_pb2_grpc.WebAccountApiStub(channel)
-        response = client.makeWebAccount(request, metadata=metadata)
-        return response
-
-
-def create_metadata():
-    """Создает метаданные для gRPC запроса"""
-    return (
-        ('refid', str(uuid.uuid1())),
-        ('sessionkey', app_data.SESSION_KEY),
-        ('device-type', app_data.DEVICE_TYPE),
-        ('user-agent-c', app_data.USER_AGENT),
+    error = getattr(response, "error", None)
+    error_code = getattr(error, "code", "") or "UNKNOWN"
+    error_data = getattr(error, "data", "") or ""
+    response_data = getattr(response, "data", "") or ""
+    raise AssertionError(
+        f"{step_name} failed: error_code={error_code}, error_data={error_data}, response_data={response_data}"
     )
 
 
-def confirm_operation(operation_id: str, otp: str = app_data.OTP_CODE):
-    """
-    Подтверждение операции через OTP
-    
-    Args:
-        operation_id: ID операции для подтверждения
-        otp: OTP код (по умолчанию из data.py)
-    
-    Returns:
-        Response от сервера
-    """
-    metadata = create_metadata()
-    
+def confirm_operation(
+    operation_id: str,
+    metadata: tuple[tuple[str, str], ...] | None = None,
+    otp: str = OTP_CODE,
+):
+    if metadata:
+        metadata_map = dict(metadata)
+        extra_headers = {
+            key: value
+            for key, value in metadata_map.items()
+            if key not in {"refid", "sessionkey", "device-type", "user-agent-c"}
+        }
+        metadata = create_metadata(
+            session_key=metadata_map.get("sessionkey", SESSION_KEY),
+            device_type=metadata_map.get("device-type", DEVICE_TYPE),
+            user_agent=metadata_map.get("user-agent-c", USER_AGENT),
+            extra_headers=extra_headers,
+        )
+
     confirm_data = {
         "operationId": operation_id,
-        "otp": otp
+        "otp": otp,
     }
-    
-    return make_grpc_request(app_data.CODE_CONFIRM_TRANSFER, confirm_data, metadata)
+    return make_grpc_request("CONFIRM_TRANSFER", confirm_data, metadata=metadata or create_metadata())
 
 
-def assert_success(response, error_message: str = "Запрос завершился с ошибкой"):
-    """
-    Проверка успешности ответа от сервера
-    
-    Args:
-        response: Ответ от сервера
-        error_message: Сообщение об ошибке
-    """
-    assert response is not None, f"{error_message}: Ответ не получен"
-    assert response.success is True, f"{error_message}: {response.error}"
-
-
-# Экспорт для использования в других файлах
 __all__ = [
-    'webTransferApi_pb2', 
-    'webTransferApi_pb2_grpc',
-    'make_grpc_request',
-    'make_web_account_request',
-    'create_metadata',
-    'confirm_operation',
-    'assert_success'
+    "assert_success",
+    "confirm_operation",
+    "create_metadata",
+    "make_grpc_request",
+    "webTransferApi_pb2",
+    "webTransferApi_pb2_grpc",
 ]
 
+
+def _extract_route_key(item) -> str | None:
+    callspec = getattr(item, 'callspec', None)
+    if callspec is None:
+        return None
+    case = callspec.params.get('case')
+    if not isinstance(case, dict):
+        return None
+    return case.get('route_key')
+
+
+def pytest_runtest_makereport(item, call):
+    if call.when != 'call':
+        return
+
+    route_key = _extract_route_key(item)
+    if not route_key:
+        return
+
+    outcome = 'failed'
+    excinfo = call.excinfo
+    if excinfo is None:
+        outcome = 'passed'
+    elif excinfo.errisinstance(pytest.skip.Exception):
+        if getattr(excinfo.value, 'allow_module_level', False) and hasattr(excinfo.value, 'msg'):
+            outcome = 'skipped'
+        elif getattr(excinfo.value, 'msg', '').startswith('xfail'):
+            outcome = 'xfailed'
+        else:
+            outcome = 'skipped'
+    elif excinfo.errisinstance(pytest.xfail.Exception):
+        outcome = 'xfailed'
+
+    ROUTE_SUMMARY[route_key][outcome] += 1
+
+
+def pytest_terminal_summary(terminalreporter, exitstatus, config):
+    if not ROUTE_SUMMARY:
+        return
+
+    terminalreporter.write_sep('-', 'Live Route Summary')
+    for route_key in sorted(ROUTE_SUMMARY):
+        counters = ROUTE_SUMMARY[route_key]
+        terminalreporter.write_line(
+            f"{route_key} -> "
+            f"passed={counters['passed']}, "
+            f"skipped={counters['skipped']}, "
+            f"failed={counters['failed']}, "
+            f"xfailed={counters['xfailed']}"
+        )

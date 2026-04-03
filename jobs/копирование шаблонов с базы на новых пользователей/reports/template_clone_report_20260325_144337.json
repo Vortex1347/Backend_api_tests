@@ -1,0 +1,202 @@
+{
+  "generated_at": "2026-03-25T14:43:37.217493",
+  "mode": "dry-run",
+  "selected_customers": [
+    "00909465"
+  ],
+  "source_summary": {
+    "template_types_count": 10,
+    "source_rows_count": 38,
+    "limit_per_type": 4,
+    "source_ids": [
+      63944,
+      63678,
+      63367,
+      63345,
+      2205,
+      2202,
+      2156,
+      2150,
+      361,
+      339,
+      1740,
+      1737,
+      1379,
+      1376,
+      2170,
+      2169,
+      2167,
+      2086,
+      68744,
+      68162,
+      68160,
+      65721,
+      2109,
+      1844,
+      1390,
+      1217,
+      68535,
+      68526,
+      66452,
+      65224,
+      1861,
+      1697,
+      1312,
+      501,
+      2210,
+      2209,
+      2208,
+      2207
+    ],
+    "by_type": {
+      "BANK_CLIENT_TRANSFER": {
+        "count": 4,
+        "source_ids": [
+          63944,
+          63678,
+          63367,
+          63345
+        ]
+      },
+      "GENERIC_PAYMENT": {
+        "count": 4,
+        "source_ids": [
+          2205,
+          2202,
+          2156,
+          2150
+        ]
+      },
+      "IPC_CARD": {
+        "count": 2,
+        "source_ids": [
+          361,
+          339
+        ]
+      },
+      "JANY_KITEP_PAYMENT": {
+        "count": 4,
+        "source_ids": [
+          1740,
+          1737,
+          1379,
+          1376
+        ]
+      },
+      "MAKE_MONEY_TRANSFER": {
+        "count": 4,
+        "source_ids": [
+          2170,
+          2169,
+          2167,
+          2086
+        ]
+      },
+      "MAKE_OTHER_BANK_TRANSFER": {
+        "count": 4,
+        "source_ids": [
+          68744,
+          68162,
+          68160,
+          65721
+        ]
+      },
+      "MAKE_QR_PAYMENT": {
+        "count": 4,
+        "source_ids": [
+          2109,
+          1844,
+          1390,
+          1217
+        ]
+      },
+      "MAKE_SWIFT_OPERATION": {
+        "count": 4,
+        "source_ids": [
+          68535,
+          68526,
+          66452,
+          65224
+        ]
+      },
+      "MOBILE_PAYMENT": {
+        "count": 4,
+        "source_ids": [
+          1861,
+          1697,
+          1312,
+          501
+        ]
+      },
+      "OWN_ACCOUNT_TRANSFER": {
+        "count": 4,
+        "source_ids": [
+          2210,
+          2209,
+          2208,
+          2207
+        ]
+      }
+    }
+  },
+  "results": [
+    {
+      "customer_no": "00909465",
+      "planned_inserts": 38,
+      "existing_duplicates": 0,
+      "inserted": 0,
+      "source_row_count": 38,
+      "source_template_ids": [
+        63944,
+        63678,
+        63367,
+        63345,
+        2205,
+        2202,
+        2156,
+        2150,
+        361,
+        339,
+        1740,
+        1737,
+        1379,
+        1376,
+        2170,
+        2169,
+        2167,
+        2086,
+        68744,
+        68162,
+        68160,
+        65721,
+        2109,
+        1844,
+        1390,
+        1217,
+        68535,
+        68526,
+        66452,
+        65224,
+        1861,
+        1697,
+        1312,
+        501,
+        2210,
+        2209,
+        2208,
+        2207
+      ],
+      "skipped_duplicate_source_ids": [],
+      "status": "success",
+      "error": null
+    }
+  ],
+  "totals": {
+    "customers": 1,
+    "source_rows_count": 38,
+    "planned_inserts": 38,
+    "existing_duplicates": 0,
+    "inserted": 0,
+    "errors": 0
+  }
+}
