@@ -1,0 +1,59 @@
+[
+  {
+    "customer_no": "00575749",
+    "account_no": "1285090000895593",
+    "currency": "USD",
+    "account_kind": "CARD",
+    "processor": "NONE",
+    "card_system": "VISA"
+  },
+  {
+    "customer_no": "00575749",
+    "account_no": "1285110000646290",
+    "currency": "KGS",
+    "account_kind": "CARD",
+    "processor": "IPC",
+    "card_no": "4446791000075141",
+    "card_mask": "4446 **** **** 5141",
+    "card_system": "VISA"
+  },
+  {
+    "customer_no": "00909466",
+    "account_no": "1280016059310156",
+    "currency": "KGS",
+    "account_kind": "CURRENT",
+    "processor": "NONE"
+  },
+  {
+    "customer_no": "00909471",
+    "account_no": "1280016059310964",
+    "currency": "KGS",
+    "account_kind": "CURRENT",
+    "processor": "NONE"
+  },
+  {
+    "customer_no": "00909471",
+    "account_no": "1280016059312075",
+    "currency": "KGS",
+    "account_kind": "CARD",
+    "processor": "COMPASS",
+    "card_no": "5262477769210628",
+    "card_system": "MASTERCARD"
+  },
+  {
+    "customer_no": "00909471",
+    "account_no": "1280016059312277",
+    "currency": "KGS",
+    "account_kind": "CARD",
+    "processor": "COMPASS",
+    "card_no": "4177480194280312",
+    "card_system": "VISA"
+  },
+  {
+    "customer_no": "00909471",
+    "account_no": "1280016059315513",
+    "currency": "USD",
+    "account_kind": "CURRENT",
+    "processor": "NONE"
+  }
+]

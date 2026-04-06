@@ -1,0 +1,214 @@
+[
+  {
+    "name": "other_bank_clearing_sky_mobile_kgs_account_none_c00909466_a0156",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING:CURRENT:NONE:KGS->EXTERNAL:KGS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909466",
+      "account_no": "1280016059310156",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "other_bank_clearing_sky_mobile_kgs_account_none_c00909471_a0964",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING:CURRENT:NONE:KGS->EXTERNAL:KGS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "other_bank_clearing_sky_mobile_kgs_card_compass_c00909471_a2075",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING:CARD:COMPASS:KGS->EXTERNAL:KGS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_no": "5262477769210628"
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "other_bank_clearing_sky_mobile_kgs_card_compass_c00909471_a2277",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING:CARD:COMPASS:KGS->EXTERNAL:KGS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480194280312"
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  },
+  {
+    "name": "other_bank_clearing_sky_mobile_kgs_card_ipc_c00575749_a6290",
+    "route_key": "MAKE_OTHER_BANK_TRANSFER:CLEARING:CARD:IPC:KGS->EXTERNAL:KGS",
+    "operation": {
+      "code": "MAKE_OTHER_BANK_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00575749",
+      "account_no": "1285110000646290",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "IPC",
+        "card_system": "VISA"
+      },
+      "card_no": "4446791000075141",
+      "card_mask": "4446 **** **** 5141"
+    },
+    "request": {
+      "transferClearingGross": "C",
+      "valueDate": "__NEXT_BUSINESS_DAY__",
+      "recipientName": "ОсОО Скай Мобайл ",
+      "recipientBankBic": "109022",
+      "accountCreditNumber": "1092220118930181",
+      "transferPurposeText": "услуги мобильной связи",
+      "knp": "42122700",
+      "amountCredit": "280.00"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": false,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    }
+  }
+]

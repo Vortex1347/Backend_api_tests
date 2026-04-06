@@ -1,0 +1,468 @@
+syntax = "proto3";
+
+package dmz_api;
+
+
+service WebAuthApi{
+  rpc authenticate (LoginRequest)returns(LoginResponse){}
+  rpc getSecondFactorCredential (GetSecondFactorCredentialRequest) returns (GetSecondFactorCredentialResponse){}
+  rpc confirmSecondFactor (ConfirmSecondFactorRequest) returns (ConfirmSecondFactorResponse){}
+  rpc retrySendingOtpToLogin (RetrySendingOtpToLoginRequest) returns (RetrySendingOtpToLoginResponse){}
+  rpc validateSession (ValidateSessionRequest) returns (ValidateSessionResponse){}
+  rpc setPassword (SetPasswordRequest) returns (SetPasswordResponse){}
+  rpc setAnswerForSecurityQuestion (SetAnswerForSecQuestionRequest) returns (SetAnswerForSecQuestionResponse) {}
+  rpc restorePassword (RestorePassRequest) returns (RestorePassResponse){}
+  rpc sendOtpDuringRestore (SendOtpDuringRestoreRequest) returns (SendOtpDuringRestoreResponse){}
+  rpc confirmOtpDuringRestore (ConfirmOtpDuringRestoreRequest) returns (ConfirmOtpDuringRestoreResponse){}
+  rpc confirmAnswerForSecurityQuestion (ConfirmAnswerForSecurityQuestionRequest) returns (ConfirmAnswerForSecurityQuestionResponse){}
+  rpc exit (ExitRequest) returns (ExitResponse){}
+  rpc selfRegistration (selfRegistrationRequest) returns (selfRegistrationResponse){}
+  rpc getGlobalIbankStatus (getGlobalIbankStatusRequest) returns (getGlobalIbankStatusResponse){}
+  rpc selfRegistrationV2 (SelfRegistrationRequestV2) returns (SelfRegistrationResponseV2){}
+  rpc confirmSelfRegistration (ConfirmSelfRegistrationRequest) returns (ConfirmSelfRegistrationResponse){}
+  rpc getValidAppVersion (getValidAppVersionRequest) returns (getValidAppVersionResponse){}
+  rpc getQRcodeForSignIn (GetQRcodeForSignInRequest) returns (GetQRcodeForSignInResponse){}
+  rpc getSessionByQRcode (GetSessionByQRcodeRequest) returns (GetSessionByQRcodeResponse){}
+  rpc authenticationByQRcode (AuthenticationByQRcodeRequest) returns (AuthenticationByQRcodeResponse){}
+}
+
+message Error {
+  string code = 1;
+  string data = 2;
+}
+
+message   LoginRequest {
+  string  username = 1;
+  string  password = 2;
+}
+message LoginResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+  string  otpDelivery = 3;
+  string  state = 4;
+  string 	securityQuestionId = 5;
+  string 	phoneNumber = 6;
+}
+message LoginResponse {
+  bool success = 1;
+  LoginResponseData data = 2;
+  Error error = 3;
+}
+
+
+message getGlobalIbankStatusRequest{}
+message getGlobalIbankStatusResponse{
+  bool success = 1;
+  GlobalIbankStatusResponse data  = 2;
+  Error error = 3;
+}
+message GlobalIbankStatusResponse{
+  string text = 1;
+  bool shouldShowText = 2;
+  string behaviorCode = 3;
+}
+
+
+message getValidAppVersionRequest{}
+
+message getValidAppVersionResponse{
+  bool success = 1;
+  ValidAppVersionResponse data  = 2;
+  Error error = 3;
+}
+
+message ValidAppVersionResponse{
+  string text = 1;
+  bool shouldShowText = 2;
+  string behaviorCode = 3;
+  string appVersion = 4;
+  string appIntegration = 5;
+  string redirectLink = 6;
+}
+
+
+message GetSecondFactorCredentialRequest {
+  string answer = 1;
+}
+message GetSecondFactorResponseData {
+  string  email = 1;
+}
+message GetSecondFactorCredentialResponse {
+  bool success = 1;
+  GetSecondFactorResponseData data = 2;
+  Error error = 3;
+}
+
+
+message ConfirmSecondFactorRequest {
+  string otp = 1;
+}
+message ConfirmSecondFactorResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+}
+message ConfirmSecondFactorResponse {
+  bool    success = 1;
+  ConfirmSecondFactorResponseData data = 2;
+  Error   error = 3;
+}
+
+
+message RetrySendingOtpToLoginRequest {}
+message RetrySendingOtpToLoginData {
+  bool  isLastSmsTry = 1;
+}
+message RetrySendingOtpToLoginResponse {
+  bool  success = 1;
+  RetrySendingOtpToLoginData data = 2;
+  Error error = 3;
+}
+
+
+message ValidateSessionRequest {}
+message ValidateSessionResponseData {
+  string  sessionId = 1;
+  string 	userId = 2;
+}
+message ValidateSessionResponse {
+  bool    success = 1;
+  ValidateSessionResponseData data = 2;
+  Error   error = 3;
+}
+
+
+message SetPasswordRequest {
+  string newPassword = 1;
+}
+message SetPasswordResponseData {
+  string sessionKey = 1;
+  string sessionId = 2;
+}
+message SetPasswordResponse {
+  bool  success = 1;
+  SetPasswordResponseData data = 2;
+  Error error = 3;
+}
+
+
+message SetAnswerForSecQuestionRequest {
+  string questionId = 1;
+  string answer = 2;
+}
+message SetAnswerForSecQuestionResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+}
+message SetAnswerForSecQuestionResponse {
+  bool    success = 1;
+  SetAnswerForSecQuestionResponseData data = 2;
+  Error   error = 3;
+}
+
+
+message RestorePassRequest {
+  string username = 1;
+  string phone = 2;
+}
+message RestorePassResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+  string  questionId = 3;
+}
+message RestorePassResponse {
+  bool    success = 1;
+  RestorePassResponseData data = 2;
+  Error   error = 3;
+}
+
+
+message SendOtpDuringRestoreRequest {
+  string otpType = 1;
+}
+message SendOtpDuringRestoreResponseData {
+  bool isLastSmsTry = 1;
+}
+message SendOtpDuringRestoreResponse {
+  bool  success = 1;
+  SendOtpDuringRestoreResponseData data = 2;
+  Error error = 3;
+}
+
+message ConfirmOtpDuringRestoreRequest {
+  string otp = 1;
+}
+message ConfirmOtpDuringRestoreResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+}
+message ConfirmOtpDuringRestoreResponse {
+  bool    success = 1;
+  ConfirmOtpDuringRestoreResponseData data = 2;
+  Error   error = 3;
+}
+
+
+message ConfirmAnswerForSecurityQuestionRequest {
+  string answer = 1;
+}
+message ConfirmAnswerForSecurityQuestionResponseData {
+  string  phone = 1;
+  string  email = 2;
+  string  sessionKey = 3;
+  string  sessionId = 4;
+}
+message ConfirmAnswerForSecurityQuestionResponse {
+  bool    success = 1;
+  ConfirmAnswerForSecurityQuestionResponseData  data = 2;
+  Error   error = 3;
+}
+
+
+message ExitRequest {}
+message ExitResponse {
+  bool success = 1;
+  Error error = 2;
+}
+
+
+message selfRegistrationRequest {
+  string cardNo = 1;
+}
+
+message selfRegistrationResponse {
+  bool success = 1;
+  selfRegistrationResponseData data = 2;
+  Error error = 3;
+}
+message selfRegistrationResponseData {
+  string phoneNumber = 1;
+  string email = 2;
+}
+
+
+message SelfRegistrationRequestV2 {
+  string cardNo = 1;
+  string codeWord = 2;
+}
+
+message SelfRegistrationResponseV2 {
+  bool success = 1;
+  SelfRegistrationResponseDataV2 data = 2;
+  Error error = 3;
+}
+
+message SelfRegistrationResponseDataV2 {
+  string phoneNumber = 1;
+  string email = 2;
+  string operationId = 3;
+}
+
+
+message ConfirmSelfRegistrationRequest {
+  string operationId = 1;
+}
+
+message ConfirmSelfRegistrationResponse {
+  bool success = 1;
+  Error error = 2;
+}
+
+message AuthenticationByQRcodeRequest {
+  string qrCode = 1;
+}
+message AuthenticationByQRcodeResponse {
+  bool    success = 1;
+  Error   error = 2;
+}
+
+message GetQRcodeForSignInRequest {
+  string uniqRequestId = 1;
+}
+message GetQRcodeForSignInResponseData {
+  string  qrCode = 1;
+}
+message GetQRcodeForSignInResponse {
+  bool    success = 1;
+  GetQRcodeForSignInResponseData data = 2;
+  Error   error = 3;
+}
+
+message GetSessionByQRcodeRequest {
+  string uniqRequestId = 1;
+}
+message GetSessionByQRcodeResponseData {
+  string  sessionKey = 1;
+  string  sessionId = 2;
+}
+message GetSessionByQRcodeResponse {
+  bool    success = 1;
+  GetSessionByQRcodeResponseData data = 2;
+  Error   error = 3;
+}
+
+//////////////////////   STREAM SERVICE
+service StreamService {
+  rpc beginStream (Empty) returns (stream StreamInstance) {}
+}
+
+message Empty {}
+
+message StreamInstance {
+  string type = 1;
+  string payload = 2;
+}
+
+//////////////////////   LOG SERVICE
+service LogService {
+  rpc insertLog (LogRequest) returns (LogResponse) {}
+}
+
+message LogRequest {
+  repeated Log logs = 1;
+}
+
+message Log {
+  string logLabel = 1;
+  string sysError = 2;
+  string url = 3;
+  string refId = 4;
+  string runId = 5;
+  string localTime = 6;
+  string time = 7;
+  string userId = 8;
+  string sessionId = 9;
+  string userLogin = 10;
+  string serviceName = 11;
+  string trace = 12;
+  string debug = 13;
+  string info = 14;
+  string warn = 15;
+  string error = 16;
+}
+
+message LogResponse {
+  bool success = 1;
+  Error error = 2;
+}
+
+//////////////////////  WEB TRANSFER API SERVICE
+
+service WebTransferApi {
+  rpc makeWebTransfer (IncomingWebTransfer) returns (OutgoingWebTransfer){}
+}
+
+message IncomingWebTransfer {
+  string code = 1;
+  string data = 2;
+}
+
+message OutgoingWebTransfer {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+
+//////////////////////  WEB PAYMENT API SERVICE
+service WebPaymentApi {
+  rpc makeWebPayment (IncomingWebPayment) returns (OutgoingWebPayment) {}
+}
+
+message IncomingWebPayment {
+  string code = 1;
+  string data = 2;
+}
+
+message OutgoingWebPayment {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+
+//////////////////////  WEB DIRECTORY SERVICE
+
+service WebDirectoryApi {
+  rpc makeWebDirectory (IncomingWebDirectory) returns (OutgoingWebDirectory){}
+}
+
+message IncomingWebDirectory {
+  string code = 1;
+  string data = 2;
+}
+
+message OutgoingWebDirectory {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+
+////////////////////// WEB UTILITY SERVICE
+service WebUtilityApi {
+  rpc makeWebUtility (IncomingWebUtility) returns (OutgoingWebUtility){}
+}
+
+message IncomingWebUtility {
+  string code = 1;
+  string data = 2;
+}
+message OutgoingWebUtility {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+
+////////////////////// WEB ACCOUNTS SERVICE
+service WebAccountApi{
+  rpc makeWebAccount(WebAccountsRequest) returns (WebAccountsResponse){}
+}
+
+
+
+message WebAccountsRequest {
+  string code = 1;
+  string data = 2;
+}
+
+message WebAccountsResponse {
+  bool success = 1;
+  string data = 2;
+  Error error = 3;
+}
+
+////////////////////// REMOTE IDENTIFICATION SERVICE
+service RemoteIdentificationApi {
+	rpc makeRemoteIdentification(RemoteIdentificationRequest) returns (RemoteIdentificationResponse){}
+}
+message RemoteIdentificationRequest {
+	string code = 1;
+	string data = 2;
+}
+
+message RemoteIdentificationResponse {
+	bool success = 1;
+	string data = 2;
+	Error error = 3;
+}
+
+service WebIntegrationApi{
+	rpc makeWebIntegration(WebIntegrationRequest) returns (WebIntegrationResponse){}
+  }
+  
+  message IntegrationError{
+	string code = 1;
+	string data = 2;
+  }
+  
+  message WebIntegrationRequest {
+	string code = 1;
+	string data = 2;
+  }
+  
+  message WebIntegrationResponse {
+	bool success = 1;
+	string data = 2;
+	IntegrationError error = 3;
+  }

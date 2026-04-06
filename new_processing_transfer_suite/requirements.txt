@@ -1,0 +1,6 @@
+grpcio>=1.69.0,<2
+protobuf>=5.29.0,<6
+psycopg2-binary>=2.9,<3
+pytest>=8,<9
+python-dotenv>=1.0,<2
+requests>=2.31,<3

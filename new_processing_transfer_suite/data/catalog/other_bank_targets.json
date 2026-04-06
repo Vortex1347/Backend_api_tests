@@ -1,0 +1,13 @@
+[
+  {
+    "target_id": "sky_mobile_kgs",
+    "currency": "KGS",
+    "value_date": "__NEXT_BUSINESS_DAY__",
+    "recipient_name": "ОсОО Скай Мобайл ",
+    "recipient_bank_bic": "109022",
+    "account_credit_number": "1092220118930181",
+    "transfer_purpose_text": "услуги мобильной связи",
+    "knp": "42122700",
+    "amount_credit": "280.00"
+  }
+]

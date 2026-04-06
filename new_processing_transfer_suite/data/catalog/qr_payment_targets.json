@@ -1,0 +1,19 @@
+[
+  {
+    "target_id": "static_elqr_kgs",
+    "currency": "KGS",
+    "amount": "100",
+    "client_type": "1",
+    "qr_version": "01",
+    "qr_type": "STATIC",
+    "qr_merchant_provider_id": "p2p.kicb.net",
+    "qr_service_id": "01",
+    "qr_service_name": "Zabrmgazpdfjfrhabrmjzfkmfnpdnf",
+    "qr_account": "1285090000630562",
+    "qr_mcc": "9999",
+    "qr_ccy": "417",
+    "qr_transaction_id": "Zabrmgazpdfjfrhabrmjzfkmfnpdnf",
+    "qr_control_sum": "f72e",
+    "qr_account_changeable": false
+  }
+]

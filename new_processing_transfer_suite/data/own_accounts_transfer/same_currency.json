@@ -1,0 +1,282 @@
+[
+  {
+    "name": "own_accounts_same_currency_account_to_card_kgs_c00909471_a0964_to_kgs_c00909471_a2075",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CURRENT:NONE:KGS->CARD:COMPASS:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_no": "5262477769210628"
+    }
+  },
+  {
+    "name": "own_accounts_same_currency_account_to_card_kgs_c00909471_a0964_to_kgs_c00909471_a2277",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CURRENT:NONE:KGS->CARD:COMPASS:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480194280312"
+    }
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_account_kgs_c00909471_a2075_to_kgs_c00909471_a0964",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CARD:COMPASS:KGS->CURRENT:NONE:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_no": "5262477769210628"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    }
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_account_kgs_c00909471_a2277_to_kgs_c00909471_a0964",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CARD:COMPASS:KGS->CURRENT:NONE:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480194280312"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059310964",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CURRENT",
+        "processor": "NONE"
+      }
+    }
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_card_kgs_c00909471_a2075_to_kgs_c00909471_a2277",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CARD:COMPASS:KGS->CARD:COMPASS:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_no": "5262477769210628"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480194280312"
+    }
+  },
+  {
+    "name": "own_accounts_same_currency_card_to_card_kgs_c00909471_a2277_to_kgs_c00909471_a2075",
+    "route_key": "MAKE_OWN_ACCOUNTS_TRANSFER:SAME_CURRENCY:CARD:COMPASS:KGS->CARD:COMPASS:KGS",
+    "operation": {
+      "code": "MAKE_OWN_ACCOUNTS_TRANSFER"
+    },
+    "sender": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312277",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "VISA"
+      },
+      "card_no": "4177480194280312"
+    },
+    "request": {
+      "amountDebit": "1.00",
+      "paymentPurpose": "Own transfer KGS to KGS"
+    },
+    "verification": {
+      "sender_balance_observable": true,
+      "recipient_balance_observable": true,
+      "statement_fallback_allowed": true,
+      "expected_status_internal": [
+        "ACCEPTED_NOT_PROCESSED",
+        "SUCCESS"
+      ],
+      "expected_status_external": [
+        "IN_PROCESS",
+        "SUCCESS"
+      ],
+      "pass_on_timeout_if_last_status_matches": true,
+      "skip_balance_check_for_processing_state": true
+    },
+    "recipient": {
+      "customer_no": "00909471",
+      "account_no": "1280016059312075",
+      "expected": {
+        "currency": "KGS",
+        "account_kind": "CARD",
+        "processor": "COMPASS",
+        "card_system": "MASTERCARD"
+      },
+      "card_no": "5262477769210628"
+    }
+  }
+]
